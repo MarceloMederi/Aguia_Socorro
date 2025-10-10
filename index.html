@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Socorro Águia 24h - Guincho Rápido</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-dark bg-primary sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">ÁGUIA 24H</a>
+            <a href="tel:+553491791955" class="btn btn-warning fw-bold d-flex align-items-center">
+                <i class="bi bi-telephone-fill me-2"></i> LIGAR AGORA
+            </a>
+        </div>
+    </nav>
+
+    <header class="hero text-white d-flex align-items-center py-5">
+        <div class="container text-center">
+            <h1 class="display-3 fw-bolder mb-3">
+                AUTO SOCORRO ÁGUIA 24H
+            </h1>
+            <p class="lead mb-4 text-warning fw-semibold">
+                Guincho Rápido para Veículos Leves e Médios.
+            </p>
+            <a href="#contato" class="btn btn-warning btn-lg fw-bold shadow-lg mb-4">
+                <i class="bi bi-arrow-down-circle-fill me-2"></i> SOLICITAR VIA FORMULÁRIO
+            </a>
+            <div class="d-flex justify-content-center gap-4 mt-3">
+                <span class="badge bg-primary fs-6"><i class="bi bi-clock-fill me-1"></i> 24 Horas</span>
+                <span class="badge bg-primary fs-6"><i class="bi bi-geo-alt-fill me-1"></i> Rápido</span>
+                <span class="badge bg-primary fs-6"><i class="bi bi-currency-dollar me-1"></i> Preço Justo</span>
+            </div>
+        </div>
+    </header>
+
+    <section id="servicos" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center text-primary mb-5 fw-bold">Nossos Serviços</h2>
+            <div class="row text-center">
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100 p-3 shadow-sm border-0">
+                        <i class="bi bi-truck-flatbed display-4 text-warning mb-3"></i>
+                        <h4 class="card-title">Guincho Leve/Médio</h4>
+                        <p class="card-text">Reboque seguro para carros e utilitários.</p>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100 p-3 shadow-sm border-0">
+                        <i class="bi bi-battery-full display-4 text-warning mb-3"></i>
+                        <h4 class="card-title">Carga de Bateria</h4>
+                        <p class="card-text">Socorro rápido para baterias descarregadas.</p>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100 p-3 shadow-sm border-0">
+                        <i class="bi bi-dash-circle-fill display-4 text-warning mb-3"></i>
+                        <h4 class="card-title">Pane Seca</h4>
+                        <p class="card-text">Entrega de combustível emergencial no local.</p>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100 p-3 shadow-sm border-0">
+                        <i class="bi bi-gear-fill display-4 text-warning mb-3"></i>
+                        <h4 class="card-title">Pequenos Reparos</h4>
+                        <p class="card-text">Serviços emergenciais para que você siga viagem.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contato" class="py-5 bg-white">
+        <div class="container">
+            <h2 class="text-center mb-4 text-primary fw-bold">Solicite o Guincho - Informe sua Localização</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <form id="formGuincho" action="#" method="POST"> 
+                        <div class="mb-3">
+                            <label for="nome" class="form-label">Seu Nome</label>
+                            <input type="text" class="form-control" id="nome" name="Nome" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="endereco" class="form-label">Endereço (Rua, Número e Ponto de Referência)</label>
+                            <input type="text" class="form-control" id="endereco" name="Endereço" required>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="bairro" class="form-label">Bairro</label>
+                                <input type="text" class="form-control" id="bairro" name="Bairro" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="cidade" class="form-label">Cidade</label>
+                                <input type="text" class="form-control" id="cidade" name="Cidade" required>
+                            </div>
+                        </div>
+
+                        <div id="feedback-message" class="alert alert-success d-none mt-3" role="alert"></div>
+
+                        <div class="d-grid mt-4">
+                            <button type="submit" class="btn btn-warning btn-lg fw-bold" id="btnEnviar">
+                                <i class="bi bi-whatsapp me-2"></i> ENVIAR SOLICITAÇÃO VIA WHATSAPP
+                            </button>
+                        </div>
+                        
+                        <p class="text-center mt-3 text-muted">*Se for emergência, ligue para agilizar! (34) 9179-1955</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-primary text-white py-3">
+        <div class="container text-center">
+            <p class="mb-0">&copy; 2025 Auto Socorro Águia 24h. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/script.js"></script>
+
+</body>
+</html>

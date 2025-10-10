@@ -1,0 +1,28 @@
+/* Paleta de Cores:
+   Primary (Azul): #0D6EFD
+   Warning (Amarelo): #FFC107
+*/
+
+/* Estilização da Seção Hero */
+.hero {
+    /* Define uma altura mínima para ocupar a tela inicial */
+    min-height: 80vh; 
+    
+    /* Pode usar uma imagem de fundo de um guincho ou textura */
+    background: linear-gradient(rgba(13, 110, 253, 0.8), rgba(13, 110, 253, 0.8)), url('fundo-guincho.jpg'); 
+    /* Use uma imagem real e renomeie o arquivo 'fundo-guincho.jpg' */
+    background-size: cover;
+    background-position: center;
+}
+
+/* Opcional: Efeito hover nos cards de serviço */
+.card:hover {
+    transform: translateY(-5px);
+    transition: all 0.3s ease;
+    border: 1px solid #FFC107 !important;
+}
+
+/* Garante que o texto dentro do Hero seja branco */
+.hero h1, .hero p {
+    color: white;
+}
