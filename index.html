@@ -88,7 +88,7 @@
 
                         <div class="mb-3">
                             <label for="cep" class="form-label">CEP</label>
-                            <input type="text" class="form-control" id="cep" name="CEP" maxlength="9" required onblur="buscarEndereco()" placeholder="Insira o CEP para buscar">
+                            <input type="text" class="form-control" id="cep" name="CEP" maxlength="9" required oninput="buscarEndereco()" placeholder="Insira o CEP para buscar">
                             <div id="cep-feedback" class="form-text text-danger d-none">CEP inválido ou não encontrado.</div>
                         </div>
                         
