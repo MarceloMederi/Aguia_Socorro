@@ -1,6 +1,6 @@
 /* Paleta de Cores:
-   Primary (Azul): #0D6EFD
-   Warning (Amarelo): #FFC107
+    Primary (Azul): #0D6EFD
+    Warning (Amarelo): #FFC107
 */
 
 /* Estilização da Seção Hero */
@@ -17,12 +17,41 @@
 
 /* Opcional: Efeito hover nos cards de serviço */
 .card:hover {
+    /* Efeito de elevação */
     transform: translateY(-5px);
     transition: all 0.3s ease;
+    /* Borda amarela sutil */
     border: 1px solid #FFC107 !important;
 }
 
 /* Garante que o texto dentro do Hero seja branco */
 .hero h1, .hero p {
     color: white;
+}
+
+/* ============================================== */
+/* ESTILO: CTA DE EMERGÊNCIA (TELEFONE)           */
+/* ============================================== */
+.cta-emergencia {
+    /* Torna o texto maior que o padrão */
+    font-size: 1.15rem; 
+    /* Cor de destaque para urgência (Azul Primário) */
+    color: #0D6EFD !important; 
+    /* Deixa o texto em negrito */
+    font-weight: bold; 
+    /* Pequeno espaçamento superior para separar do botão */
+    margin-top: 15px !important; 
+}
+
+/* Estilização do link de telefone dentro da CTA */
+.cta-emergencia a {
+    /* Garante que o link use a cor de destaque (Azul) */
+    color: #0D6EFD !important; 
+    /* Remove sublinhado padrão */
+    text-decoration: none; 
+}
+
+.cta-emergencia a:hover {
+    /* Sublinha levemente ao passar o mouse */
+    text-decoration: underline;
 }

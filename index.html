@@ -79,32 +79,47 @@
             <h2 class="text-center mb-4 text-primary fw-bold">Solicite o Guincho - Informe sua Localização</h2>
             <div class="row justify-content-center">
                 <div class="col-lg-8">
-                    <form id="formGuincho" action="#" method="POST"> 
+                    <form id="formGuincho" action="#" method="POST" novalidate> 
                         
                         <div class="mb-3">
                             <label for="nome" class="form-label">Seu Nome</label>
                             <input type="text" class="form-control" id="nome" name="Nome" required placeholder="Insrira o seu nome">
+                            <div class="invalid-feedback">
+                                Por favor, insira seu nome.
+                            </div>
                         </div>
 
                         <div class="mb-3">
                             <label for="cep" class="form-label">CEP</label>
                             <input type="text" class="form-control" id="cep" name="CEP" maxlength="9" required oninput="buscarEndereco()" placeholder="Insira o CEP para buscar">
                             <div id="cep-feedback" class="form-text text-danger d-none">CEP inválido ou não encontrado.</div>
+                            <div class="invalid-feedback">
+                                O CEP deve ter 8 dígitos.
+                            </div>
                         </div>
                         
                         <div class="mb-3">
                             <label for="endereco" class="form-label">Rua</label>
                             <input type="text" class="form-control" id="endereco" name="Rua" placeholder="Aguardando preenchimento automático..." readonly required>
+                            <div class="invalid-feedback">
+                                O campo Rua é obrigatório.
+                            </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="bairro" class="form-label">Bairro</label>
                                 <input type="text" class="form-control" id="bairro" name="Bairro" readonly required>
+                                <div class="invalid-feedback">
+                                    O campo Bairro é obrigatório.
+                                </div>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="cidade" class="form-label">Cidade / UF</label>
                                 <input type="text" class="form-control" id="cidade" name="Cidade" readonly required>
+                                <div class="invalid-feedback">
+                                    O campo Cidade é obrigatório.
+                                </div>
                             </div>
                         </div>
                         
@@ -112,20 +127,20 @@
                             <div class="col-md-6 mb-3">
                                 <label for="numero" class="form-label">Número (Obrigatório)</label>
                                 <input type="text" class="form-control" id="numero" name="Número" 
-                                    required pattern="[0-9]{1,}|[Ss]/[Nn]" 
-                                    title="Insira um número válido ou 'S/N'">
+                                       required pattern="[0-9]{1,}|[Ss]/[Nn]" 
+                                       title="Insira um número válido ou 'S/N'">
                                 <div class="invalid-feedback">
-                                    Por favor, insira o número da residência ou 'S/N'.
+                                    Por favor, insira o número da residência (apenas números) ou 'S/N'.
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="referencia" class="form-label">Ponto de Referência (Ex: Próximo ao posto)</label>
+                                <label for="referencia" class="form-label">Ponto de Referência (Opcional)</label>
                                 <input type="text" class="form-control" id="referencia" name="Referência">
-                            </div>
+                                </div>
                         </div>
 
 
-                        <div id="feedback-message" class="alert alert-success d-none mt-3" role="alert"></div>
+                        <div id="feedback-message" class="alert d-none mt-3" role="alert"></div>
 
                         <div class="d-grid mt-4">
                             <button type="submit" class="btn btn-warning btn-lg fw-bold" id="btnEnviar">
@@ -133,7 +148,10 @@
                             </button>
                         </div>
                         
-                        <p class="text-center mt-3 text-muted">*Se for emergência, ligue para agilizar! (34) 9179-1955</p>
+                        <p class="text-center cta-emergencia">
+                            *Se for emergência, ligue para agilizar! 
+                            <a href="tel:+553491791955">(34) 9179-1955</a>
+                        </p>
                     </form>
                 </div>
             </div>
@@ -147,7 +165,7 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/script.js"></script>
+    <script src="assets/js/script.js"></script> 
 
 </body>
 </html>
