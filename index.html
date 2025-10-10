@@ -108,9 +108,20 @@
                             </div>
                         </div>
                         
-                        <div class="mb-3">
-                            <label for="numero" class="form-label">Número e Ponto de Referência (Obrigatório)</label>
-                            <input type="text" class="form-control" id="numero" name="Número" required>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="numero" class="form-label">Número (Obrigatório)</label>
+                                <input type="text" class="form-control" id="numero" name="Número" 
+                                    required pattern="[0-9]{1,}|[Ss]/[Nn]" 
+                                    title="Insira um número válido ou 'S/N'">
+                                <div class="invalid-feedback">
+                                    Por favor, insira o número da residência ou 'S/N'.
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="referencia" class="form-label">Ponto de Referência (Ex: Próximo ao posto)</label>
+                                <input type="text" class="form-control" id="referencia" name="Referência">
+                            </div>
                         </div>
 
 
