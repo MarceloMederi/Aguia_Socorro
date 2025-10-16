@@ -9,15 +9,19 @@
 .hero {
     min-height: 80vh; 
     
-    /* CAMINHO DA IMAGEM: CORRIGIDO E SEPARADO PARA EVITAR CONFLITO */
+    /* CORREÇÃO: Sintaxe para a imagem de fundo com gradiente por cima */
     background-image: linear-gradient(rgba(13, 110, 253, 0.8), rgba(13, 110, 253, 0.8)), 
                       url('../images/guincho-fundo.jpg'); 
     background-color: #0D6EFD; /* Fallback de cor */
     background-size: cover;
     background-position: center;
-    background-attachment: fixed; /* Efeito parallax */
+    background-attachment: fixed; /* Efeito parallax (desabilitado em mobile abaixo) */
     
-    /* Ajuste de padding/espaçamento para telas pequenas */
+    /* Adiciona flexbox para centralizar o conteúdo verticalmente */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
     padding: 3rem 0 !important; 
 }
 
@@ -26,20 +30,41 @@
     color: white;
 }
 
-/* Ajuste do tamanho da fonte para o título principal em telas menores */
+/* OTIMIZAÇÃO PARA SMARTPHONES E TELAS MENORES (Max 576px) */
 @media (max-width: 576px) {
+    
+    /* Desabilita o parallax em mobile para melhor performance */
+    .hero {
+        background-attachment: scroll !important; 
+        padding-top: 5rem !important;
+        padding-bottom: 5rem !important;
+    }
+
+    /* Diminui o tamanho do título principal em celulares */
     .hero h1 {
-        /* Diminui o tamanho da fonte em celulares */
         font-size: 2.5rem !important; 
     }
+    
+    /* Torna o botão um pouco menor */
     .hero .btn-lg {
-        /* Torna o botão um pouco menor em telas muito pequenas */
         font-size: 1rem !important;
         padding: 0.5rem 1rem !important;
     }
-    /* Reduz o espaçamento interno do hero */
-    .hero {
-        padding: 2rem 0 !important; 
+    
+    /* CORREÇÃO: Ajuste CRÍTICO para os badges (24h, Rápido, Preço Justo) */
+    .hero .d-flex.gap-4 {
+        /* Permite que os itens quebrem para a linha de baixo se não houver espaço */
+        flex-wrap: wrap; 
+        /* Centraliza o grupo de badges na horizontal */
+        justify-content: center !important; 
+        /* Reduz o espaço entre os badges */
+        gap: 0.5rem !important; 
+    }
+
+    /* Reduz o tamanho da fonte e padding dos badges */
+    .hero .badge {
+        font-size: 0.7rem; 
+        padding: 0.3em 0.6em;
     }
 }
 
@@ -47,6 +72,11 @@
 /* ============================================== */
 /* ESTILIZAÇÃO DOS CARDS DE SERVIÇO               */
 /* ============================================== */
+.card:hover {
+    transform: translateY(-5px);
+    transition: all 0.3s ease;
+    border: 1px solid #FFC107 !important;
+}
 
 /* Garante que os cards de serviço tenham a mesma altura */
 .card.h-100 {
@@ -56,16 +86,11 @@
 /* Em telas muito pequenas, garante que os cards tenham altura mínima */
 @media (max-width: 576px) {
     #servicos .card {
-        min-height: 200px; /* Garante que o card não fique muito esmagado */
+        min-height: 200px; 
         padding: 1rem !important;
     }
 }
 
-.card:hover {
-    transform: translateY(-5px);
-    transition: all 0.3s ease;
-    border: 1px solid #FFC107 !important;
-}
 
 /* ============================================== */
 /* NOVO ESTILO: GUINCHO EM AÇÃO (Galeria de Fotos)*/
@@ -76,16 +101,15 @@
 }
 
 #guincho-em-acao .card-img-top {
-    /* Mantido o 'cover' para cards que possuem a proporção correta */
+    /* Manter 'cover' para alinhar os cards (e aceitar o corte na imagem vertical) */
     object-fit: cover; 
-    /* Altura fixa mantida, pois você optou por usá-la para alinhar os cards (e aceitar o corte na vertical) */
     height: 250px; 
     border-bottom: 3px solid var(--bs-primary);
 }
 
-/* Para a imagem maior, se quiser que ela adapte sua altura automaticamente */
+/* Para a imagem de baixo (largura total) */
 #guincho-em-acao .col-12 .card-img-top {
-    height: auto; /* Permite que a altura da imagem se ajuste naturalmente */
+    height: auto; /* Permite a altura natural para a imagem grande */
 }
 
 /* Ajuste do texto para melhor alinhamento e leitura */
@@ -96,10 +120,10 @@
     margin-bottom: 0.5rem; 
 }
 
-/* Em telas pequenas, a altura fixa pode não ser ideal ou a imagem pode parecer muito grande */
+/* Otimização da altura da imagem da galeria em tablets/celulares */
 @media (max-width: 768px) {
      #guincho-em-acao .card-img-top {
-        /* Reduz a altura fixa para algo mais adequado a um celular */
+        /* Reduz a altura fixa para algo mais adequado a telas menores */
         height: 200px; 
     }
 }
@@ -124,15 +148,10 @@
     text-decoration: underline;
 }
 
-/* Otimização para telas muito pequenas no formulário */
+/* Otimização da CTA para telas muito pequenas */
 @media (max-width: 576px) {
     .cta-emergencia {
         font-size: 1rem;
-        text-align: center; /* Centraliza a chamada */
+        text-align: center;
     }
-    /* Oculta os badges (24 Horas, Rápido, Preço Justo) em telas muito pequenas, se necessário */
-    /* .hero .d-flex.justify-content-center.gap-4 {
-        flex-direction: column; 
-        gap: 0.5rem !important;
-    } */
 }
