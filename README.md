@@ -47,7 +47,9 @@ AGUIA_SOCORRO/
 
 1.  **Clone ou Baixe o Repositório:**
     ```bash
-    git clone [https://www.youtube.com/watch?v=6YQIWRyPxnk](https://www.youtube.com/watch?v=6YQIWRyPxnk)
+    git clone 
+    [https://github.com/MarceloMederi/Aguia_Socorro.git]
+    
     cd AGUIA_SOCORRO
     ```
 
