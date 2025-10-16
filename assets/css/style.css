@@ -3,25 +3,18 @@
     Warning (Amarelo): #FFC107
 */
 
-/* Estilização da Seção Hero */
+/* ============================================== */
+/* ESTILIZAÇÃO DA SEÇÃO HERO (CABEÇALHO)          */
+/* ============================================== */
 .hero {
-    /* Define uma altura mínima para ocupar a tela inicial */
     min-height: 80vh; 
     
-    /* Pode usar uma imagem de fundo de um guincho ou textura */
-    background: linear-gradient(rgba(13, 110, 253, 0.8), rgba(13, 110, 253, 0.8)), url('fundo-guincho.jpg'); 
-    /* Use uma imagem real e renomeie o arquivo 'fundo-guincho.jpg' */
+    /* CAMINHO DA IMAGEM: VERIFIQUE AQUI! */
+    /* Certifique-se de que 'guincho-fundo.jpg' está em 'assets/images/' */
+    background: linear-gradient(rgba(13, 110, 253, 0.8), rgba(13, 110, 253, 0.8)), url('../images/guincho-fundo.jpg'); 
     background-size: cover;
     background-position: center;
-}
-
-/* Opcional: Efeito hover nos cards de serviço */
-.card:hover {
-    /* Efeito de elevação */
-    transform: translateY(-5px);
-    transition: all 0.3s ease;
-    /* Borda amarela sutil */
-    border: 1px solid #FFC107 !important;
+    background-attachment: fixed; 
 }
 
 /* Garante que o texto dentro do Hero seja branco */
@@ -30,28 +23,57 @@
 }
 
 /* ============================================== */
+/* ESTILIZAÇÃO DOS CARDS DE SERVIÇO               */
+/* ============================================== */
+.card:hover {
+    transform: translateY(-5px);
+    transition: all 0.3s ease;
+    border: 1px solid #FFC107 !important;
+}
+
+/* ============================================== */
+/* NOVO ESTILO: GUINCHO EM AÇÃO (Galeria de Fotos)*/
+/* ============================================== */
+#guincho-em-acao .card {
+    border-radius: .5rem; 
+    overflow: hidden; 
+}
+
+#guincho-em-acao .card-img-top {
+    object-fit: cover; 
+    height: 250px; /* Altura fixa para as imagens dos cards menores */
+    border-bottom: 3px solid var(--bs-primary);
+}
+
+/* Para a imagem maior, se quiser que ela adapte sua altura automaticamente */
+#guincho-em-acao .col-12 .card-img-top {
+    height: auto; /* Permite que a altura da imagem se ajuste naturalmente */
+}
+
+/* Ajuste do texto para melhor alinhamento e leitura */
+#guincho-em-acao .card-text {
+    text-align: justify; /* Justifica o texto para blocos mais uniformes */
+}
+#guincho-em-acao .card-body h5 {
+    margin-bottom: 0.5rem; /* Adiciona um pequeno espaço entre o título e o texto */
+}
+
+
+/* ============================================== */
 /* ESTILO: CTA DE EMERGÊNCIA (TELEFONE)           */
 /* ============================================== */
 .cta-emergencia {
-    /* Torna o texto maior que o padrão */
     font-size: 1.15rem; 
-    /* Cor de destaque para urgência (Azul Primário) */
     color: #0D6EFD !important; 
-    /* Deixa o texto em negrito */
     font-weight: bold; 
-    /* Pequeno espaçamento superior para separar do botão */
     margin-top: 15px !important; 
 }
 
-/* Estilização do link de telefone dentro da CTA */
 .cta-emergencia a {
-    /* Garante que o link use a cor de destaque (Azul) */
     color: #0D6EFD !important; 
-    /* Remove sublinhado padrão */
     text-decoration: none; 
 }
 
 .cta-emergencia a:hover {
-    /* Sublinha levemente ao passar o mouse */
     text-decoration: underline;
 }

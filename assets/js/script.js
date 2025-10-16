@@ -5,10 +5,10 @@ const doneTypingInterval = 500;
 const cepInput = document.getElementById('cep');
 
 // ==========================================================
-// FUNÇÃO 1: FORMATAR CEP e DEBOUNCING
+// FUNÇÃO 1: FORMATAR CEP e DEBOUNCING (BUSCA AUTOMÁTICA)
 // ==========================================================
 
-// Formata o CEP (00000-000) enquanto o usuário digita
+// 1. Evento para formatar o CEP (00000-000) enquanto o usuário digita
 cepInput.addEventListener('input', function() {
     let cep = cepInput.value.replace(/\D/g, ''); // Remove tudo que não for dígito
     
@@ -50,10 +50,9 @@ function performSearch() {
     enderecoInput.placeholder = "Buscando endereço...";
     cepInput.classList.remove('is-invalid'); // Limpa a classe de erro do Bootstrap
 
-    // SE O CEP FOR INVÁLIDO OU VAZIO, APENAS LIMPA E SAI.
+    // Verifica se o CEP tem 8 dígitos para realizar a busca
     if (cep.length !== 8) {
         enderecoInput.placeholder = "Aguardando preenchimento automático...";
-        // Não é necessário buscar se não tem 8 dígitos
         return; 
     }
     
@@ -61,11 +60,11 @@ function performSearch() {
         .then(response => response.json())
         .then(data => {
             if (data.erro || !data.logradouro) {
-                // Se der erro ou o endereço for em área sem rua (ex: caixa postal), pede preenchimento manual
+                // CEP inválido ou não encontrado
                 feedback.textContent = 'CEP inválido, não encontrado ou sem endereço. Preencha manualmente.';
                 feedback.classList.remove('d-none');
                 enderecoInput.placeholder = "CEP não encontrado. Preencha manualmente.";
-                // Libera os campos para preenchimento manual, caso a API não tenha encontrado
+                // Libera os campos para preenchimento manual
                 enderecoInput.readOnly = false;
                 bairroInput.readOnly = false;
                 cidadeInput.readOnly = false;
@@ -84,7 +83,7 @@ function performSearch() {
             }
         })
         .catch(error => {
-            // Em caso de erro na requisição (falha de rede, etc.)
+            // Erro na requisição (falha de rede)
             feedback.textContent = 'Erro ao conectar com o servidor de CEP. Preencha manualmente.';
             feedback.classList.remove('d-none');
             enderecoInput.placeholder = "Erro na busca. Preencha manualmente.";
@@ -96,11 +95,11 @@ function performSearch() {
 }
 
 // ==========================================================
-// FUNÇÃO 2: VALIDAR FORMULÁRIO (ajustada para CEP)
+// FUNÇÃO 2: VALIDAR FORMULÁRIO
 // ==========================================================
 function validarFormulario(form) {
     let isValid = true;
-    const cep = cepInput.value.replace(/\D/g, ''); // CEP sem formatação
+    const cep = cepInput.value.replace(/\D/g, ''); 
     const cepFeedback = document.getElementById('cep-feedback');
     
     // 1. Validação do CEP: Deve ter exatamente 8 dígitos.
@@ -134,7 +133,7 @@ document.getElementById('formGuincho').addEventListener('submit', function(event
     const feedbackMessage = document.getElementById('feedback-message');
     const btnEnviar = document.getElementById('btnEnviar');
     
-    // EXECUTAR VALIDAÇÃO PRIMEIRO
+    // EXECUTAR VALIDAÇÃO
     if (!validarFormulario(form)) {
         // Rola a página até o formulário em caso de erro de validação
         document.getElementById('contato').scrollIntoView({ behavior: 'smooth', block: 'start' });

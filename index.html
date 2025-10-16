@@ -74,7 +74,44 @@
         </div>
     </section>
 
-    <section id="contato" class="py-5 bg-white">
+    <section id="guincho-em-acao" class="py-5 bg-white">
+        <div class="container">
+            <h2 class="text-center text-primary mb-5 fw-bold">Guincho Águia 24h em Ação!</h2>
+            <p class="text-center lead mb-4">Veja a nossa frota e a agilidade no resgate de veículos. Confie em quem faz!</p>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="card shadow-sm border-0 h-100">
+                        <img src="assets/images/guincho-acao-1.jpg" class="card-img-top" alt="Guincho Águia 24h carregando carro" loading="lazy">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title text-primary">Reboque Rápido e Seguro</h5>
+                            <p class="card-text flex-grow-1">Transportamos seu veículo com total cuidado e agilidade. Contamos com equipamentos modernos para garantir a segurança em cada serviço.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card shadow-sm border-0 h-100">
+                        <img src="assets/images/guincho-acao-2.jpg" class="card-img-top" alt="Guincho Águia 24h auxiliando veículo" loading="lazy">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title text-primary">Prontidão para Qualquer Situação</h5>
+                            <p class="card-text flex-grow-1">Nossa equipe está preparada para atender diversas situações, garantindo que você e seu veículo cheguem ao destino com tranquilidade.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-12 mb-4 d-flex justify-content-center"> 
+                     <div class="card shadow-sm border-0 w-100" style="max-width: 800px;">
+                        <img src="assets/images/guincho-acao-0.jpg" class="card-img-top" alt="Frota de guincho Águia 24h" loading="lazy">
+                        <div class="card-body text-center d-flex flex-column">
+                            <h5 class="card-title text-primary">Frota Moderna e Equipe Qualificada</h5>
+                            <p class="card-text flex-grow-1">Investimos em equipamentos de ponta e em uma equipe treinada para oferecer o melhor atendimento 24 horas por dia.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contato" class="py-5 bg-light">
         <div class="container">
             <h2 class="text-center mb-4 text-primary fw-bold">Solicite o Guincho - Informe sua Localização</h2>
             <div class="row justify-content-center">
@@ -91,7 +128,7 @@
 
                         <div class="mb-3">
                             <label for="cep" class="form-label">CEP</label>
-                            <input type="text" class="form-control" id="cep" name="CEP" maxlength="9" required oninput="buscarEndereco()" placeholder="Insira o CEP para buscar">
+                            <input type="text" class="form-control" id="cep" name="CEP" maxlength="9" required placeholder="Insira o CEP para buscar">
                             <div id="cep-feedback" class="form-text text-danger d-none">CEP inválido ou não encontrado.</div>
                             <div class="invalid-feedback">
                                 O CEP deve ter 8 dígitos.
@@ -127,8 +164,8 @@
                             <div class="col-md-6 mb-3">
                                 <label for="numero" class="form-label">Número (Obrigatório)</label>
                                 <input type="text" class="form-control" id="numero" name="Número" 
-                                       required pattern="[0-9]{1,}|[Ss]/[Nn]" 
-                                       title="Insira um número válido ou 'S/N'">
+                                        required pattern="[0-9]{1,}|[Ss]/[Nn]" 
+                                        title="Insira um número válido ou 'S/N'">
                                 <div class="invalid-feedback">
                                     Por favor, insira o número da residência (apenas números) ou 'S/N'.
                                 </div>
@@ -138,7 +175,6 @@
                                 <input type="text" class="form-control" id="referencia" name="Referência">
                                 </div>
                         </div>
-
 
                         <div id="feedback-message" class="alert d-none mt-3" role="alert"></div>
 
