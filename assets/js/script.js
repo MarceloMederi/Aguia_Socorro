@@ -1,113 +1,125 @@
 // Número de telefone para onde a mensagem será enviada
 const WHATSAPP_NUMBER = "553491791955"; 
-let typingTimer;               
+let typingTimer;              
 const doneTypingInterval = 500; 
+const cepInput = document.getElementById('cep');
 
 // ==========================================================
-// FUNÇÃO 1: BUSCAR ENDEREÇO POR CEP (Debouncing)
-// (Sem alteração)
+// FUNÇÃO 1: FORMATAR CEP e DEBOUNCING
 // ==========================================================
+
+// Formata o CEP (00000-000) enquanto o usuário digita
+cepInput.addEventListener('input', function() {
+    let cep = cepInput.value.replace(/\D/g, ''); // Remove tudo que não for dígito
+    
+    // Aplica a máscara: 5 dígitos e um hífen, se houver mais de 5
+    if (cep.length > 5) {
+        cepInput.value = cep.substring(0, 5) + '-' + cep.substring(5, 8);
+    } else {
+        cepInput.value = cep;
+    }
+
+    // Inicia o Debouncing (espera o usuário parar de digitar para buscar)
+    buscarEndereco();
+});
+
+
 function buscarEndereco() {
     clearTimeout(typingTimer);
-    typingTimer = setTimeout(performSearch, doneTypingInterval);
+    // Só busca se o campo for preenchido com 9 caracteres (5 + '-' + 3)
+    if (cepInput.value.length === 9) {
+        typingTimer = setTimeout(performSearch, doneTypingInterval);
+    }
 }
 
+
 function performSearch() {
-    const cepInput = document.getElementById('cep');
     const enderecoInput = document.getElementById('endereco');
     const bairroInput = document.getElementById('bairro');
     const cidadeInput = document.getElementById('cidade');
     const feedback = document.getElementById('cep-feedback');
 
+    // Remove formatação para enviar para a API (8 dígitos puros)
     let cep = cepInput.value.replace(/\D/g, ''); 
 
-    // Limpeza dos campos
+    // Limpeza e preparação dos campos
     enderecoInput.value = '';
     bairroInput.value = '';
     cidadeInput.value = '';
     feedback.classList.add('d-none');
+    enderecoInput.placeholder = "Buscando endereço...";
+    cepInput.classList.remove('is-invalid'); // Limpa a classe de erro do Bootstrap
 
     // SE O CEP FOR INVÁLIDO OU VAZIO, APENAS LIMPA E SAI.
     if (cep.length !== 8) {
-        if (cep.length > 5) {
-            cepInput.value = cep.substring(0, 5) + '-' + cep.substring(5);
-        }
         enderecoInput.placeholder = "Aguardando preenchimento automático...";
+        // Não é necessário buscar se não tem 8 dígitos
         return; 
     }
-    
-    // Garante a formatação final
-    cepInput.value = cep.substring(0, 5) + '-' + cep.substring(5);
-
-    enderecoInput.placeholder = "Buscando endereço...";
     
     fetch(`https://viacep.com.br/ws/${cep}/json/`)
         .then(response => response.json())
         .then(data => {
-            if (data.erro) {
+            if (data.erro || !data.logradouro) {
+                // Se der erro ou o endereço for em área sem rua (ex: caixa postal), pede preenchimento manual
+                feedback.textContent = 'CEP inválido, não encontrado ou sem endereço. Preencha manualmente.';
                 feedback.classList.remove('d-none');
                 enderecoInput.placeholder = "CEP não encontrado. Preencha manualmente.";
+                // Libera os campos para preenchimento manual, caso a API não tenha encontrado
+                enderecoInput.readOnly = false;
+                bairroInput.readOnly = false;
+                cidadeInput.readOnly = false;
             } else {
                 enderecoInput.value = data.logradouro || '';
                 bairroInput.value = data.bairro || '';
                 cidadeInput.value = `${data.localidade} / ${data.uf}` || '';
                 
+                // Bloqueia os campos após o preenchimento automático
+                enderecoInput.readOnly = true;
+                bairroInput.readOnly = true;
+                cidadeInput.readOnly = true;
+
                 enderecoInput.placeholder = "";
                 document.getElementById('numero').focus(); 
             }
         })
         .catch(error => {
+            // Em caso de erro na requisição (falha de rede, etc.)
+            feedback.textContent = 'Erro ao conectar com o servidor de CEP. Preencha manualmente.';
             feedback.classList.remove('d-none');
             enderecoInput.placeholder = "Erro na busca. Preencha manualmente.";
+            enderecoInput.readOnly = false;
+            bairroInput.readOnly = false;
+            cidadeInput.readOnly = false;
             console.error("Erro na busca de CEP:", error);
         });
 }
 
 // ==========================================================
-// NOVA FUNÇÃO: VALIDAR FORMULÁRIO
+// FUNÇÃO 2: VALIDAR FORMULÁRIO (ajustada para CEP)
 // ==========================================================
 function validarFormulario(form) {
     let isValid = true;
-
-    // 1. Validação de campos vazios (Built-in do HTML5, mas checamos para ter certeza)
-    if (!form.checkValidity()) {
-        // Se o navegador encontrar campos obrigatórios vazios, ele já exibe a mensagem de erro padrão.
-        form.classList.add('was-validated'); // Adiciona a classe para exibir o feedback do Bootstrap
-        isValid = false;
-    } else {
-        form.classList.remove('was-validated');
-    }
-
-    // 2. Validação Específica: CEP DEVE CONTER SOMENTE NÚMEROS (8 dígitos após remover formatação)
-    const cepInput = document.getElementById('cep');
-    const cep = cepInput.value.replace(/\D/g, '');
+    const cep = cepInput.value.replace(/\D/g, ''); // CEP sem formatação
     const cepFeedback = document.getElementById('cep-feedback');
-
-    if (cep.length !== 8 || isNaN(cep)) {
-        // Se o CEP tiver menos de 8 dígitos ou não for número, marcamos como inválido
+    
+    // 1. Validação do CEP: Deve ter exatamente 8 dígitos.
+    if (cep.length !== 8) {
         cepInput.classList.add('is-invalid');
         cepFeedback.textContent = 'O CEP deve ter 8 dígitos numéricos.';
         cepFeedback.classList.remove('d-none');
         isValid = false;
     } else {
         cepInput.classList.remove('is-invalid');
+        cepFeedback.classList.add('d-none');
     }
     
-    // 3. Validação Específica: NÚMERO DE ENDEREÇO DEVE CONTER SOMENTE NÚMEROS
-    const numeroInput = document.getElementById('numero');
-    // Remove apenas espaços para permitir "S/N" ou números com letras (que podem ser válidos)
-    const numeroValue = numeroInput.value.trim();
+    // 2. Validação de campos obrigatórios do HTML5/Bootstrap
+    if (!form.checkValidity()) {
+        form.classList.add('was-validated'); 
+        isValid = false;
+    } 
 
-    // Se o valor não for vazio E não for apenas números
-    if (numeroValue && !/^\d+$/.test(numeroValue)) {
-        // Permite números e letras (para S/N ou Lote 12), mas valida se contém algo
-        // O código anterior não validava o formato, apenas se estava preenchido.
-        // Se você quiser que seja APENAS NÚMEROS, use: if (numeroValue && !/^\d+$/.test(numeroValue)) {
-        
-        // Vamos manter a validação mais flexível para o número da casa (permitindo letras como 'S/N'), 
-        // mas marcamos como erro se estiver vazio e o HTML não pegar.
-    }
-    
     return isValid;
 }
 
@@ -124,14 +136,16 @@ document.getElementById('formGuincho').addEventListener('submit', function(event
     
     // EXECUTAR VALIDAÇÃO PRIMEIRO
     if (!validarFormulario(form)) {
-        feedbackMessage.classList.remove('alert-success');
+        // Rola a página até o formulário em caso de erro de validação
+        document.getElementById('contato').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        
+        feedbackMessage.classList.remove('alert-success', 'd-none');
         feedbackMessage.classList.add('alert-danger');
         feedbackMessage.innerHTML = '<strong>Atenção!</strong> Por favor, preencha os campos obrigatórios corretamente.';
-        feedbackMessage.classList.remove('d-none');
         return; // Interrompe o envio
     }
 
-    // Se a validação passou, coleta os dados e envia (código inalterado)
+    // Se a validação passou, coleta os dados e envia
     const formData = new FormData(form);
     const nome = formData.get('Nome');
     const cep = formData.get('CEP');
@@ -168,10 +182,17 @@ document.getElementById('formGuincho').addEventListener('submit', function(event
     feedbackMessage.classList.add('alert-success');
     feedbackMessage.innerHTML = '<strong>Redirecionando!</strong> Abra a conversa no WhatsApp para enviar sua solicitação.';
     
+    // Reseta o formulário após 4 segundos
     setTimeout(() => {
         btnEnviar.disabled = false;
         btnEnviar.innerHTML = '<i class="bi bi-whatsapp me-2"></i> ENVIAR SOLICITAÇÃO VIA WHATSAPP';
         form.reset();
         form.classList.remove('was-validated');
+        feedbackMessage.classList.add('d-none');
+        // Rebloqueia os campos de endereço
+        document.getElementById('endereco').readOnly = true;
+        document.getElementById('bairro').readOnly = true;
+        document.getElementById('cidade').readOnly = true;
+        document.getElementById('endereco').placeholder = "Aguardando preenchimento automático...";
     }, 4000); 
 });
