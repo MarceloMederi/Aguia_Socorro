@@ -15,7 +15,7 @@
     background-color: #0D6EFD; /* Fallback de cor */
     background-size: cover;
     background-position: center;
-    background-attachment: fixed; /* Efeito parallax (desabilitado em mobile abaixo) */
+    background-attachment: fixed; /* Efeito parallax */
     
     /* Adiciona flexbox para centralizar o conteúdo verticalmente */
     display: flex;
@@ -51,7 +51,7 @@
         padding: 0.5rem 1rem !important;
     }
     
-    /* CORREÇÃO: Ajuste CRÍTICO para os badges (24h, Rápido, Preço Justo) */
+    /* CORREÇÃO CRÍTICA: Ajuste para os badges (24h, Rápido, Preço Justo) */
     .hero .d-flex.gap-4 {
         /* Permite que os itens quebrem para a linha de baixo se não houver espaço */
         flex-wrap: wrap; 
@@ -65,6 +65,12 @@
     .hero .badge {
         font-size: 0.7rem; 
         padding: 0.3em 0.6em;
+    }
+    
+    /* Em telas muito pequenas, garante que os cards de serviço tenham altura mínima */
+    #servicos .card {
+        min-height: 200px; 
+        padding: 1rem !important;
     }
 }
 
@@ -83,14 +89,6 @@
     height: 100%;
 }
 
-/* Em telas muito pequenas, garante que os cards tenham altura mínima */
-@media (max-width: 576px) {
-    #servicos .card {
-        min-height: 200px; 
-        padding: 1rem !important;
-    }
-}
-
 
 /* ============================================== */
 /* NOVO ESTILO: GUINCHO EM AÇÃO (Galeria de Fotos)*/
@@ -101,7 +99,7 @@
 }
 
 #guincho-em-acao .card-img-top {
-    /* Manter 'cover' para alinhar os cards (e aceitar o corte na imagem vertical) */
+    /* Altura fixa e object-fit: cover para alinhamento dos cards menores */
     object-fit: cover; 
     height: 250px; 
     border-bottom: 3px solid var(--bs-primary);
@@ -123,7 +121,7 @@
 /* Otimização da altura da imagem da galeria em tablets/celulares */
 @media (max-width: 768px) {
      #guincho-em-acao .card-img-top {
-        /* Reduz a altura fixa para algo mais adequado a telas menores */
+        /* Reduz a altura fixa para telas menores */
         height: 200px; 
     }
 }

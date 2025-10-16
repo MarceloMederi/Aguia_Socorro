@@ -1,76 +1,113 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auto Socorro Águia 24h - Guincho Rápido</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <title>Águia 24H - Auto Socorro e Guincho em Uberlândia</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMDJzL3m88x8TzD9d1yTqg/8w5I2QW9j4lX3f/p4uF4qC62T5wD71/XF8gB6wK+yQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <link rel="stylesheet" href="assets/css/style.css">
+
     <link rel="icon" type="image/png" href="assets/images/car_11436545.png">
+    
+    <style>
+        /* Definindo a cor Primary para uso com var() */
+        :root {
+            --bs-primary: #0D6EFD;
+        }
+    </style>
 </head>
 <body>
 
-    <nav class="navbar navbar-dark bg-primary sticky-top">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="#">ÁGUIA 24H</a>
-            <a href="tel:+553491791955" class="btn btn-warning fw-bold d-flex align-items-center">
-                <i class="bi bi-telephone-fill me-2"></i> LIGAR AGORA
-            </a>
-        </div>
-    </nav>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary py-3">
+            <div class="container">
+                <a class="navbar-brand fw-bold fs-4" href="#">
+                    <i class="fas fa-truck-pickup me-2"></i>ÁGUIA 24H
+                </a>
+                
+                <span class="d-none d-md-inline text-white me-auto ms-4" style="font-size: 0.9rem;">
+                    Base em **Uberlândia-MG**
+                </span>
 
-    <header class="hero text-white d-flex align-items-center py-5">
-        <div class="container text-center">
-            <h1 class="display-3 fw-bolder mb-3">
-                AUTO SOCORRO ÁGUIA 24H
-            </h1>
-            <p class="lead mb-4 text-warning fw-semibold">
-                Guincho Rápido para Veículos Leves e Médios.
-            </p>
-            <a href="#contato" class="btn btn-warning btn-lg fw-bold shadow-lg mb-4">
-                <i class="bi bi-arrow-down-circle-fill me-2"></i> SOLICITAR VIA FORMULÁRIO
+                <a href="tel:SEU-TELEFONE-AQUI" class="btn btn-warning fw-bold">
+                    <i class="fas fa-phone-alt me-2"></i>LIGAR AGORA
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero d-flex align-items-center text-center">
+        <div class="container">
+            <h1 class="display-3 fw-bolder mb-3 text-white">AUTO SOCORRO ÁGUIA 24H</h1>
+            <p class="lead mb-4 text-white">Guincho Rápido para Veículos Leves e Médios.</p>
+            
+            <a href="#solicitar" class="btn btn-warning btn-lg fw-bold mb-4 shadow">
+                <i class="fas fa-map-marker-alt me-2"></i> SOLICITAR VIA FORMULÁRIO
             </a>
-            <div class="d-flex justify-content-center gap-4 mt-3">
-                <span class="badge bg-primary fs-6"><i class="bi bi-clock-fill me-1"></i> 24 Horas</span>
-                <span class="badge bg-primary fs-6"><i class="bi bi-geo-alt-fill me-1"></i> Rápido</span>
-                <span class="badge bg-primary fs-6"><i class="bi bi-currency-dollar me-1"></i> Preço Justo</span>
+
+            <div class="d-flex justify-content-center gap-4">
+                <span class="badge bg-primary text-white p-2">
+                    <i class="fas fa-clock me-1"></i> 24 Horas
+                </span>
+                <span class="badge bg-primary text-white p-2">
+                    <i class="fas fa-route me-1"></i> Rápido
+                </span>
+                <span class="badge bg-primary text-white p-2">
+                    <i class="fas fa-dollar-sign me-1"></i> Preço Justo
+                </span>
             </div>
         </div>
-    </header>
+    </section>
 
     <section id="servicos" class="py-5 bg-light">
         <div class="container">
             <h2 class="text-center text-primary mb-5 fw-bold">Nossos Serviços</h2>
-            <div class="row text-center">
-                <div class="col-md-3 mb-4">
-                    <div class="card h-100 p-3 shadow-sm border-0">
-                        <i class="bi bi-truck-flatbed display-4 text-warning mb-3"></i>
-                        <h4 class="card-title">Guincho Leve/Médio</h4>
-                        <p class="card-text">Reboque seguro para carros e utilitários.</p>
+            <div class="row g-4">
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="card shadow-sm h-100 text-center border-0 p-3">
+                        <div class="card-body">
+                            <i class="fas fa-truck-moving text-warning mb-3" style="font-size: 3rem;"></i>
+                            <h5 class="card-title fw-bold">Guincho Leve/Médio</h5>
+                            <p class="card-text text-muted">Reboque seguro para carros e utilitários.</p>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-3 mb-4">
-                    <div class="card h-100 p-3 shadow-sm border-0">
-                        <i class="bi bi-battery-full display-4 text-warning mb-3"></i>
-                        <h4 class="card-title">Carga de Bateria</h4>
-                        <p class="card-text">Socorro rápido para baterias descarregadas.</p>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="card shadow-sm h-100 text-center border-0 p-3">
+                        <div class="card-body">
+                            <i class="fas fa-battery-full text-warning mb-3" style="font-size: 3rem;"></i>
+                            <h5 class="card-title fw-bold">Carga de Bateria</h5>
+                            <p class="card-text text-muted">Socorro rápido para baterias descarregadas.</p>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-3 mb-4">
-                    <div class="card h-100 p-3 shadow-sm border-0">
-                        <i class="bi bi-dash-circle-fill display-4 text-warning mb-3"></i>
-                        <h4 class="card-title">Pane Seca</h4>
-                        <p class="card-text">Entrega de combustível emergencial no local.</p>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="card shadow-sm h-100 text-center border-0 p-3">
+                        <div class="card-body">
+                            <i class="fas fa-gas-pump text-warning mb-3" style="font-size: 3rem;"></i>
+                            <h5 class="card-title fw-bold">Pane Seca</h5>
+                            <p class="card-text text-muted">Entrega de combustível emergencial no local.</p>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-3 mb-4">
-                    <div class="card h-100 p-3 shadow-sm border-0">
-                        <i class="bi bi-gear-fill display-4 text-warning mb-3"></i>
-                        <h4 class="card-title">Pequenos Reparos</h4>
-                        <p class="card-text">Serviços emergenciais para que você siga viagem.</p>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="card shadow-sm h-100 text-center border-0 p-3">
+                        <div class="card-body">
+                            <i class="fas fa-tools text-warning mb-3" style="font-size: 3rem;"></i>
+                            <h5 class="card-title fw-bold">Pequenos Reparos</h5>
+                            <p class="card-text text-muted">Serviços emergenciais para que você siga viagem.</p>
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
@@ -79,8 +116,9 @@
         <div class="container">
             <h2 class="text-center text-primary mb-5 fw-bold">Guincho Águia 24h em Ação!</h2>
             <p class="text-center lead mb-4">Veja a nossa frota e a agilidade no resgate de veículos. Confie em quem faz!</p>
-            <div class="row">
-                <div class="col-md-6 mb-4">
+            <div class="row g-4">
+                
+                <div class="col-md-6">
                     <div class="card shadow-sm border-0 h-100">
                         <img src="assets/images/guincho-acao-1.jpg" class="card-img-top" alt="Guincho Águia 24h carregando carro" loading="lazy">
                         <div class="card-body d-flex flex-column">
@@ -89,9 +127,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 mb-4">
+
+                <div class="col-md-6">
                     <div class="card shadow-sm border-0 h-100">
-                        <img src="assets/images/guincho-acao-2.jpg" class="card-img-top" alt="Guincho Águia 24h auxiliando veículo" loading="lazy">
+                        <img src="assets/images/guincho-acao-2.jpg" class="card-img-top" alt="Prontidão para Qualquer Situação" loading="lazy">
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title text-primary">Prontidão para Qualquer Situação</h5>
                             <p class="card-text flex-grow-1">Nossa equipe está preparada para atender diversas situações, garantindo que você e seu veículo cheguem ao destino com tranquilidade.</p>
@@ -99,9 +138,9 @@
                     </div>
                 </div>
                 
-                <div class="col-12 mb-4 d-flex justify-content-center"> 
-                     <div class="card shadow-sm border-0 w-100" style="max-width: 800px;">
-                        <img src="assets/images/guincho-acao-0.jpg" class="card-img-top" alt="Frota de guincho Águia 24h" loading="lazy">
+                <div class="col-12 mt-4"> 
+                    <div class="card shadow-sm border-0">
+                        <img src="assets/images/guincho-fundo.jpg" class="card-img-top" alt="Frota de guincho Águia 24h" loading="lazy">
                         <div class="card-body text-center d-flex flex-column">
                             <h5 class="card-title text-primary">Frota Moderna e Equipe Qualificada</h5>
                             <p class="card-text flex-grow-1">Investimos em equipamentos de ponta e em uma equipe treinada para oferecer o melhor atendimento 24 horas por dia.</p>
@@ -112,82 +151,35 @@
         </div>
     </section>
 
-    <section id="contato" class="py-5 bg-light">
+    <section id="solicitar" class="py-5 bg-light">
         <div class="container">
-            <h2 class="text-center mb-4 text-primary fw-bold">Solicite o Guincho - Informe sua Localização</h2>
+            <h2 class="text-center text-primary mb-5 fw-bold">Solicite o Guincho - Informe sua Localização</h2>
             <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <form id="formGuincho" action="#" method="POST" novalidate> 
-                        
+                <div class="col-lg-6 col-md-8">
+                    <form class="bg-white p-4 shadow rounded">
                         <div class="mb-3">
                             <label for="nome" class="form-label">Seu Nome</label>
-                            <input type="text" class="form-control" id="nome" name="Nome" required placeholder="Insrira o seu nome">
-                            <div class="invalid-feedback">
-                                Por favor, insira seu nome.
-                            </div>
+                            <input type="text" class="form-control" id="nome" required>
                         </div>
-
                         <div class="mb-3">
-                            <label for="cep" class="form-label">CEP</label>
-                            <input type="text" class="form-control" id="cep" name="CEP" maxlength="9" required placeholder="Insira o CEP para buscar">
-                            <div id="cep-feedback" class="form-text text-danger d-none">CEP inválido ou não encontrado.</div>
-                            <div class="invalid-feedback">
-                                O CEP deve ter 8 dígitos.
-                            </div>
+                            <label for="telefone" class="form-label">Telefone (WhatsApp)</label>
+                            <input type="tel" class="form-control" id="telefone" placeholder="(99) 99999-9999" required>
                         </div>
-                        
                         <div class="mb-3">
-                            <label for="endereco" class="form-label">Rua</label>
-                            <input type="text" class="form-control" id="endereco" name="Rua" placeholder="Aguardando preenchimento automático..." readonly required>
-                            <div class="invalid-feedback">
-                                O campo Rua é obrigatório.
-                            </div>
+                            <label for="local" class="form-label">Local de Ocorrência (Cidade/Rua)</label>
+                            <input type="text" class="form-control" id="local" placeholder="Ex: Rua das Flores, 123 - Uberlândia" required>
                         </div>
-
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="bairro" class="form-label">Bairro</label>
-                                <input type="text" class="form-control" id="bairro" name="Bairro" readonly required>
-                                <div class="invalid-feedback">
-                                    O campo Bairro é obrigatório.
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="cidade" class="form-label">Cidade / UF</label>
-                                <input type="text" class="form-control" id="cidade" name="Cidade" readonly required>
-                                <div class="invalid-feedback">
-                                    O campo Cidade é obrigatório.
-                                </div>
-                            </div>
+                        <div class="mb-4">
+                            <label for="tipo" class="form-label">Tipo de Veículo/Pane</label>
+                            <textarea class="form-control" id="tipo" rows="2" placeholder="Ex: Corsa Hatch, bateria descarregada"></textarea>
                         </div>
                         
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="numero" class="form-label">Número (Obrigatório)</label>
-                                <input type="text" class="form-control" id="numero" name="Número" 
-                                        required pattern="[0-9]{1,}|[Ss]/[Nn]" 
-                                        title="Insira um número válido ou 'S/N'">
-                                <div class="invalid-feedback">
-                                    Por favor, insira o número da residência (apenas números) ou 'S/N'.
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="referencia" class="form-label">Ponto de Referência (Opcional)</label>
-                                <input type="text" class="form-control" id="referencia" name="Referência">
-                                </div>
-                        </div>
-
-                        <div id="feedback-message" class="alert d-none mt-3" role="alert"></div>
-
-                        <div class="d-grid mt-4">
-                            <button type="submit" class="btn btn-warning btn-lg fw-bold" id="btnEnviar">
-                                <i class="bi bi-whatsapp me-2"></i> ENVIAR SOLICITAÇÃO VIA WHATSAPP
-                            </button>
-                        </div>
+                        <button type="submit" class="btn btn-warning w-100 fw-bold btn-lg">
+                            <i class="fab fa-whatsapp me-2"></i> ENVIAR SOLICITAÇÃO VIA WHATSAPP
+                        </button>
                         
-                        <p class="text-center cta-emergencia">
-                            *Se for emergência, ligue para agilizar! 
-                            <a href="tel:+553491791955">(34) 9179-1955</a>
+                        <p class="text-center mt-3 text-muted cta-emergencia">
+                            Ou, para emergências imediatas: <a href="tel:SEU-TELEFONE-AQUI"><i class="fas fa-phone-alt"></i> SEU-TELEFONE-AQUI</a>
                         </p>
                     </form>
                 </div>
@@ -195,14 +187,20 @@
         </div>
     </section>
 
-    <footer class="bg-primary text-white py-3">
+    <footer class="bg-dark text-white py-4">
         <div class="container text-center">
-            <p class="mb-0">&copy; 2025 Auto Socorro Águia 24h. Todos os direitos reservados.</p>
+            <p class="mb-1">
+                &copy; 2025 Águia 24H. Todos os direitos reservados.
+            </p>
+            <p class="mb-0" style="font-size: 0.9rem;">
+                Sede em **Uberlândia-MG**. Atendemos toda a região e rodovias federais no Brasil.
+            </p>
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/script.js"></script> 
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+    <script src="assets/js/script.js"></script>
 </body>
 </html>
