@@ -1,33 +1,45 @@
-// Número de telefone para onde a mensagem será enviada
+// Número de telefone para onde a mensagem será enviada (Mantenha este número ou substitua)
 const WHATSAPP_NUMBER = "553491791955"; 
-let typingTimer;              
+let typingTimer;
 const doneTypingInterval = 500; 
-const cepInput = document.getElementById('cep');
+const cepInput = document.getElementById('cep'); // Agora 'cep' existe no HTML
 
 // ==========================================================
 // FUNÇÃO 1: FORMATAR CEP e DEBOUNCING (BUSCA AUTOMÁTICA)
 // ==========================================================
 
-// 1. Evento para formatar o CEP (00000-000) enquanto o usuário digita
-cepInput.addEventListener('input', function() {
-    let cep = cepInput.value.replace(/\D/g, ''); // Remove tudo que não for dígito
+// O bloco DOMContentLoaded garante que este código só rode após o HTML carregar
+document.addEventListener('DOMContentLoaded', function() {
     
-    // Aplica a máscara: 5 dígitos e um hífen, se houver mais de 5
-    if (cep.length > 5) {
-        cepInput.value = cep.substring(0, 5) + '-' + cep.substring(5, 8);
-    } else {
-        cepInput.value = cep;
+    // 1. Evento para formatar o CEP (00000-000) enquanto o usuário digita
+    if (cepInput) { // Verifica se o campo CEP existe (para evitar erros)
+        cepInput.addEventListener('input', function() {
+            let cep = cepInput.value.replace(/\D/g, ''); // Remove tudo que não for dígito
+            
+            // Aplica a máscara: 5 dígitos e um hífen, se houver mais de 5
+            if (cep.length > 5) {
+                cepInput.value = cep.substring(0, 5) + '-' + cep.substring(5, 8);
+            } else {
+                cepInput.value = cep;
+            }
+
+            // Inicia o Debouncing (espera o usuário parar de digitar para buscar)
+            buscarEndereco();
+        });
     }
 
-    // Inicia o Debouncing (espera o usuário parar de digitar para buscar)
-    buscarEndereco();
+    // 2. Evento para submissão do formulário
+    const formGuincho = document.getElementById('formGuincho');
+    if (formGuincho) {
+        formGuincho.addEventListener('submit', enviarDadosParaWhatsapp);
+    }
 });
 
 
 function buscarEndereco() {
     clearTimeout(typingTimer);
     // Só busca se o campo for preenchido com 9 caracteres (5 + '-' + 3)
-    if (cepInput.value.length === 9) {
+    if (cepInput && cepInput.value.length === 9) {
         typingTimer = setTimeout(performSearch, doneTypingInterval);
     }
 }
@@ -63,7 +75,9 @@ function performSearch() {
                 // CEP inválido ou não encontrado
                 feedback.textContent = 'CEP inválido, não encontrado ou sem endereço. Preencha manualmente.';
                 feedback.classList.remove('d-none');
+                cepInput.classList.add('is-invalid');
                 enderecoInput.placeholder = "CEP não encontrado. Preencha manualmente.";
+                
                 // Libera os campos para preenchimento manual
                 enderecoInput.readOnly = false;
                 bairroInput.readOnly = false;
@@ -79,6 +93,7 @@ function performSearch() {
                 cidadeInput.readOnly = true;
 
                 enderecoInput.placeholder = "";
+                // Foca no campo número para o usuário completar
                 document.getElementById('numero').focus(); 
             }
         })
@@ -86,6 +101,7 @@ function performSearch() {
             // Erro na requisição (falha de rede)
             feedback.textContent = 'Erro ao conectar com o servidor de CEP. Preencha manualmente.';
             feedback.classList.remove('d-none');
+            cepInput.classList.add('is-invalid');
             enderecoInput.placeholder = "Erro na busca. Preencha manualmente.";
             enderecoInput.readOnly = false;
             bairroInput.readOnly = false;
@@ -117,7 +133,9 @@ function validarFormulario(form) {
     if (!form.checkValidity()) {
         form.classList.add('was-validated'); 
         isValid = false;
-    } 
+    } else {
+        form.classList.remove('was-validated');
+    }
 
     return isValid;
 }
@@ -126,7 +144,7 @@ function validarFormulario(form) {
 // ==========================================================
 // FUNÇÃO 3: ENVIAR DADOS PARA WHATSAPP
 // ==========================================================
-document.getElementById('formGuincho').addEventListener('submit', function(event) {
+function enviarDadosParaWhatsapp(event) {
     event.preventDefault(); 
 
     const form = event.target;
@@ -136,7 +154,7 @@ document.getElementById('formGuincho').addEventListener('submit', function(event
     // EXECUTAR VALIDAÇÃO
     if (!validarFormulario(form)) {
         // Rola a página até o formulário em caso de erro de validação
-        document.getElementById('contato').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        document.getElementById('solicitar').scrollIntoView({ behavior: 'smooth', block: 'start' });
         
         feedbackMessage.classList.remove('alert-success', 'd-none');
         feedbackMessage.classList.add('alert-danger');
@@ -147,6 +165,7 @@ document.getElementById('formGuincho').addEventListener('submit', function(event
     // Se a validação passou, coleta os dados e envia
     const formData = new FormData(form);
     const nome = formData.get('Nome');
+    const telefone = formData.get('Telefone');
     const cep = formData.get('CEP');
     const rua = formData.get('Rua'); 
     const numero = formData.get('Número'); 
@@ -154,19 +173,19 @@ document.getElementById('formGuincho').addEventListener('submit', function(event
     const bairro = formData.get('Bairro');
     const cidade = formData.get('Cidade');
     
-    let localMessage = `📍 Local: ${rua}, Nº ${numero}\n`;
+    let localMessage = `Rua/Logradouro: ${rua}, Nº ${numero}\n`;
     if (referencia) {
-        localMessage += `📌 Ref: ${referencia}\n`;
+        localMessage += `Tipo/Ref: ${referencia}\n`;
     }
 
     const message = encodeURIComponent(
         `🚨 NOVA SOLICITAÇÃO DE GUINCHO - ÁGUIA 24H 🚨\n\n` +
-        `👤 Nome do Cliente: ${nome}\n` +
+        `👤 Nome: ${nome}\n` +
+        `📞 Telefone: ${telefone}\n` +
         `🔑 CEP: ${cep}\n` +
         localMessage +
         `🏘️ Bairro: ${bairro}\n` +
-        `🏙️ Cidade: ${cidade}\n\n` +
-        `*** Por favor, entre em contato imediatamente. ***`
+        `🏙️ Cidade: ${cidade}`
     );
 
     const whatsappURL = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${message}`;
@@ -174,6 +193,7 @@ document.getElementById('formGuincho').addEventListener('submit', function(event
     btnEnviar.disabled = true;
     btnEnviar.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Abrindo WhatsApp...';
     
+    // Abre a URL do WhatsApp em uma nova aba
     window.open(whatsappURL, '_blank');
     
     // Feedback de sucesso
@@ -184,14 +204,15 @@ document.getElementById('formGuincho').addEventListener('submit', function(event
     // Reseta o formulário após 4 segundos
     setTimeout(() => {
         btnEnviar.disabled = false;
-        btnEnviar.innerHTML = '<i class="bi bi-whatsapp me-2"></i> ENVIAR SOLICITAÇÃO VIA WHATSAPP';
+        btnEnviar.innerHTML = '<i class="fab fa-whatsapp me-2"></i> ENVIAR SOLICITAÇÃO VIA WHATSAPP';
         form.reset();
         form.classList.remove('was-validated');
         feedbackMessage.classList.add('d-none');
+        
         // Rebloqueia os campos de endereço
         document.getElementById('endereco').readOnly = true;
         document.getElementById('bairro').readOnly = true;
         document.getElementById('cidade').readOnly = true;
         document.getElementById('endereco').placeholder = "Aguardando preenchimento automático...";
     }, 4000); 
-});
+}
