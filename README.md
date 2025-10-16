@@ -30,7 +30,17 @@ O projeto foi construído utilizando **HTML5** e **Bootstrap 5** para garantir u
 
 A estrutura de pastas segue uma convenção comum em projetos web para facilitar a organização dos ativos:
 ```plaintext
-AGUIA_SOCORRO/ ├── assets/ │ ├── css/ │ │ └── style.css # Estilos customizados e media queries │ ├── images/ │ │ ├── guincho-acao-1.jpg │ │ ├── guincho-acao-2.jpg │ │ └── guincho-fundo.jpg │ └── js/ │ └── script.js # Arquivo para scripts JavaScript customizados (ainda não implementado) └── index.html # Arquivo principal da Landing Page └── README.md # Este arquivo de documentação
+AGUIA_SOCORRO/ 
+├── assets/ 
+│ ├── css/ 
+│ │ └── style.css # Estilos customizados e media queries 
+│ ├── images/ │ │ ├── guincho-acao-1.jpg │ 
+│ ├── guincho-acao-2.jpg │ 
+│ └── guincho-fundo.jpg 
+│ └── js/ 
+│ └── script.js # Arquivo para scripts JavaScript customizados (ainda não implementado) 
+└── index.html # Arquivo principal da Landing Page 
+└── README.md # Este arquivo de documentação
 ```
 
 ## 🛠 Como Rodar Localmente
