@@ -9,12 +9,16 @@
 .hero {
     min-height: 80vh; 
     
-    /* CAMINHO DA IMAGEM: VERIFIQUE AQUI! */
-    /* Certifique-se de que 'guincho-fundo.jpg' está em 'assets/images/' */
-    background: linear-gradient(rgba(13, 110, 253, 0.8), rgba(13, 110, 253, 0.8)), url('../images/guincho-fundo.jpg'); 
+    /* CAMINHO DA IMAGEM: CORRIGIDO E SEPARADO PARA EVITAR CONFLITO */
+    background-image: linear-gradient(rgba(13, 110, 253, 0.8), rgba(13, 110, 253, 0.8)), 
+                      url('../images/guincho-fundo.jpg'); 
+    background-color: #0D6EFD; /* Fallback de cor */
     background-size: cover;
     background-position: center;
-    background-attachment: fixed; 
+    background-attachment: fixed; /* Efeito parallax */
+    
+    /* Ajuste de padding/espaçamento para telas pequenas */
+    padding: 3rem 0 !important; 
 }
 
 /* Garante que o texto dentro do Hero seja branco */
@@ -22,9 +26,41 @@
     color: white;
 }
 
+/* Ajuste do tamanho da fonte para o título principal em telas menores */
+@media (max-width: 576px) {
+    .hero h1 {
+        /* Diminui o tamanho da fonte em celulares */
+        font-size: 2.5rem !important; 
+    }
+    .hero .btn-lg {
+        /* Torna o botão um pouco menor em telas muito pequenas */
+        font-size: 1rem !important;
+        padding: 0.5rem 1rem !important;
+    }
+    /* Reduz o espaçamento interno do hero */
+    .hero {
+        padding: 2rem 0 !important; 
+    }
+}
+
+
 /* ============================================== */
 /* ESTILIZAÇÃO DOS CARDS DE SERVIÇO               */
 /* ============================================== */
+
+/* Garante que os cards de serviço tenham a mesma altura */
+.card.h-100 {
+    height: 100%;
+}
+
+/* Em telas muito pequenas, garante que os cards tenham altura mínima */
+@media (max-width: 576px) {
+    #servicos .card {
+        min-height: 200px; /* Garante que o card não fique muito esmagado */
+        padding: 1rem !important;
+    }
+}
+
 .card:hover {
     transform: translateY(-5px);
     transition: all 0.3s ease;
@@ -40,8 +76,10 @@
 }
 
 #guincho-em-acao .card-img-top {
+    /* Mantido o 'cover' para cards que possuem a proporção correta */
     object-fit: cover; 
-    height: 250px; /* Altura fixa para as imagens dos cards menores */
+    /* Altura fixa mantida, pois você optou por usá-la para alinhar os cards (e aceitar o corte na vertical) */
+    height: 250px; 
     border-bottom: 3px solid var(--bs-primary);
 }
 
@@ -52,10 +90,18 @@
 
 /* Ajuste do texto para melhor alinhamento e leitura */
 #guincho-em-acao .card-text {
-    text-align: justify; /* Justifica o texto para blocos mais uniformes */
+    text-align: justify; 
 }
 #guincho-em-acao .card-body h5 {
-    margin-bottom: 0.5rem; /* Adiciona um pequeno espaço entre o título e o texto */
+    margin-bottom: 0.5rem; 
+}
+
+/* Em telas pequenas, a altura fixa pode não ser ideal ou a imagem pode parecer muito grande */
+@media (max-width: 768px) {
+     #guincho-em-acao .card-img-top {
+        /* Reduz a altura fixa para algo mais adequado a um celular */
+        height: 200px; 
+    }
 }
 
 
@@ -76,4 +122,17 @@
 
 .cta-emergencia a:hover {
     text-decoration: underline;
+}
+
+/* Otimização para telas muito pequenas no formulário */
+@media (max-width: 576px) {
+    .cta-emergencia {
+        font-size: 1rem;
+        text-align: center; /* Centraliza a chamada */
+    }
+    /* Oculta os badges (24 Horas, Rápido, Preço Justo) em telas muito pequenas, se necessário */
+    /* .hero .d-flex.justify-content-center.gap-4 {
+        flex-direction: column; 
+        gap: 0.5rem !important;
+    } */
 }
